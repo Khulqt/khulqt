@@ -35,7 +35,7 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 600px;
-            margin: 20px auto;
+            margin:  70px auto;
             box-sizing: border-box;
         }
         .info-box {
@@ -94,12 +94,18 @@
             align-items: center;
             position: fixed;
             top: 0;
-            width: 96%;
-            max-width: 600px;
+            width: 100%;
             background-color: #ffffff;
-            padding: 8px;
+            padding: 10px 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+            box-sizing: border-box;
+        }
+        .header .title {
+            margin: 0;
+            font-size: 24px;
+            text-align: center;
+            flex: 1;
         }
         .header img {
             max-width: 80px;
@@ -111,19 +117,26 @@
             height: auto;
             cursor: pointer;
         }
+        @media (max-width: 600px) {
+            .header .title {
+                font-size: 18px;
+            }
+            .header img {
+                max-width: 60px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
         <img src="https://i.ibb.co/3pFhCJ6/Nero-AI-image-denoiser-Nero-AI-Face.png" alt="Header Image">
+        <h1 class="title">تسجيل طلب</h1>
         <a href="https://t.me/HE0_ALL" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
         </a>
     </div>
     
-    <h1 class="title">تسجيل طلب</h1>
-
     <div class="container">
         <div class="info-box">
             * قم بكتابة بيانات صحيحة ليتم الرد عليها.<br><br>
