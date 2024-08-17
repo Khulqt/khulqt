@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البحث بالرقم القومي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            direction: rtl;
+            text-align: center;
+            padding-top: 50px;
+        }
+        h2 {
+            color: #800080;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #800080;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #4a0072;
+        }
+    </style>
+</head>
+<body>
+    <h2>ادخل الرقم القومي</h2>
+    <form id="searchForm">
+        <input type="text" id="nationalID" placeholder="الرقم القومي">
+        <br>
+        <input type="submit" value="بحث">
+    </form>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let nationalID = document.getElementById('nationalID').value;
+
+            fetch('channel_data.xlsx').then(response => {
+                return response.arrayBuffer();
+            }).then(data => {
+                let workbook = XLSX.read(data, {type: 'array'});
+                let firstSheetName = workbook.SheetNames[0];
+                let worksheet = workbook.Sheets[firstSheetName];
+                let jsonData = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+                
+                let found = false;
+                for (let i = 1; i < jsonData.length; i++) {
+                    if (jsonData[i][0] === nationalID) { // افتراض أن الرقم القومي موجود في العمود الأول
+                        alert(`الحالة: ${jsonData[i][1]}`); // افتراض أن حالة الطلب في العمود الثاني
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    alert("الرقم القومي غير مسجل.");
+                }
+            }).catch(error => {
+                console.error(error);
+                alert("حدث خطأ أثناء قراءة ملف Excel.");
+            });
+        });
+    </script>
+</body>
+</html>
