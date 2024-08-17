@@ -31,11 +31,39 @@
             max-width: 80px;
             height: auto;
         }
-        .header h1 {
-            color: #800080;
+        .side-menu {
+            position: fixed;
+            top: 50px; /* Adjust according to header height */
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #800080;
+            color: #ffffff;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1001;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+        .side-menu.active {
+            transform: translateX(0);
+        }
+        .side-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .side-menu a:hover {
+            text-decoration: underline;
+        }
+        .side-menu .close-btn {
             font-size: 24px;
-            margin: 0;
-            text-align: center;
+            cursor: pointer;
+            display: flex;
+            justify-content: flex-end;
         }
         .main-content {
             margin-top: 80px;
@@ -109,13 +137,44 @@
             font-size: 14px;
             margin: 0;
         }
+        .menu-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #800080;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+        }
+        .menu-icon:hover {
+            background-color: #4a0072;
+        }
+        .menu-icon span {
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
         <img src="https://i.ibb.co/3pFhCJ6/Nero-AI-image-denoiser-Nero-AI-Face.png" alt="Header Image">
-        <h1>خُلقت لتعيش</h1>
+    </div>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+        <span>&#9776;</span>
+    </div>
+
+    <div class="side-menu" id="sideMenu">
+        <div class="close-btn" onclick="toggleMenu()">&times;</div>
+        <a href="https://wa.me/+201503480089">تواصل معنا</a>
+        <a href="sign.html">تسجيل طلب</a>
     </div>
 
     <div class="main-content">
@@ -127,10 +186,20 @@
         <a href="sign.html" class="button">تسجيل طلب</a>
     </div>
 
-
     <div class="footer">
         <p>جميع الحقوق محفوظة لمؤسسة خُلقت لتعيش©</p>
     </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+            } else {
+                menu.classList.add('active');
+            }
+        }
+    </script>
 
 </body>
 </html>
