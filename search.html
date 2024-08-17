@@ -42,6 +42,15 @@
         input[type="submit"]:hover {
             background-color: #4a0072;
         }
+        .note {
+            background-color: #ffcccc;
+            color: #ff0000;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -51,6 +60,9 @@
         <br>
         <input type="submit" value="بحث">
     </form>
+    <div class="note">
+        قد تستغرق مراجعة الطلب 48 ساعة...⏳
+    </div>
 
     <script>
         document.getElementById('searchForm').addEventListener('submit', function(event) {
