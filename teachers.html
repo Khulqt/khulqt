@@ -102,16 +102,21 @@
         .search-container button:hover {
             background-color: #4a0072;
         }
-        .note {
-            border: 2px solid red;
-            color: red;
-            padding: 10px;
-            margin-top: 10px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 40px;
-            background-color: #fff5f5;
-            width: auto%;
+        .teacher-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .teacher-card h2 {
+            font-size: 18px;
+            color: #800080;
+            margin: 0 0 10px;
+        }
+        .teacher-card p {
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -126,29 +131,42 @@
         <div class="slide active">
             <img src="https://i.ibb.co/2YpgfH4/Green-Illustrated-Science-Project-Presentation.png" alt="Teacher Slide 1">
         </div>
-        
         <div class="slide">
-    <img src="https://i.ibb.co/fX8s7Ms/Chalkboard-Mathematics-Class-Orientation-Education-Presentation.png" alt="Slide Description">
-</div>
-        <!-- يمكنك إضافة المزيد من الشرائح هنا -->
+            <img src="https://i.ibb.co/fX8s7Ms/Chalkboard-Mathematics-Class-Orientation-Education-Presentation.png" alt="Slide Description">
+        </div>
+        <div class="slide">
+            <img src="https://i.ibb.co/r5HSnYq/Chalkboard-Mathematics-Class-Orientation-Education-Presentation-1.png" alt="Slide Description">
+        </div>
         <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
         <a class="next" onclick="changeSlide(1)">&#10095;</a>
     </div>
 
     <div class="search-container">
-        <label for="class">ادخل الصف الدراسي</label>
+        <label for="class">اختر الصف الدراسي</label>
         <select id="class">
             <option value="primary">الصفوف الإبتدائية</option>
             <option value="middle">الصفوف الإعدادية</option>
             <option value="secondary">الصفوف الثانوية</option>
         </select>
-        <button onclick="showNote()">بحث</button>
-        <div class="note" id="note">
-            ميزة بحث المدرسين ستكون متوفرة قريباً...⏳
-        </div>
+        <label for="subject">اختر المادة</label>
+        <select id="subject">
+            <!-- المواد ستتغير بناءً على الصف الدراسي -->
+        </select>
+        <button onclick="searchTeachers()">بحث</button>
+        <div id="results"></div>
     </div>
 
     <script>
+        let teachersData = {};
+
+        // تحميل بيانات المعلمين من ملف JSON
+        fetch('teachers.json')
+            .then(response => response.json())
+            .then(data => {
+                teachersData = data;
+            })
+            .catch(error => console.error('Error loading teachers data:', error));
+
         function changeSlide(n) {
             let slides = document.querySelectorAll('.slide');
             let slideIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
@@ -157,10 +175,53 @@
             slides[slideIndex].classList.add('active');
         }
 
-        function showNote() {
-            const note = document.getElementById('note');
-            note.style.display = 'block';
+        function searchTeachers() {
+            const classSelect = document.getElementById('class');
+            const subjectSelect = document.getElementById('subject');
+            const classValue = classSelect.value;
+            const subjectValue = subjectSelect.value;
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            if (classValue && subjectValue) {
+                const teachers = teachersData[classValue]?.[subjectValue] || [];
+                if (teachers.length > 0) {
+                    teachers.forEach(teacher => {
+                        const teacherCard = document.createElement('div');
+                        teacherCard.className = 'teacher-card';
+                        teacherCard.innerHTML = `
+                            <h2>${teacher.name}</h2>
+                            <p>رقم الهاتف: ${teacher.phone}</p>
+                        `;
+                        resultsDiv.appendChild(teacherCard);
+                    });
+                } else {
+                    resultsDiv.innerHTML = '<p>لا يوجد معلمين لهذه المادة بعد.</p>';
+                }
+            }
         }
+
+        document.getElementById('class').addEventListener('change', function() {
+            const classValue = this.value;
+            const subjectSelect = document.getElementById('subject');
+            subjectSelect.innerHTML = '';
+
+            let subjects = [];
+            if (classValue === 'primary') {
+                subjects = ['اللغة العربية', 'اللغة الإنجليزية', 'الدراسات الإجتماعية', 'الرياضيات', 'العلوم', 'التربية الدينية'];
+            } else if (classValue === 'middle') {
+                subjects = ['اللغة العربية', 'اللغة الإنجليزية', 'اللغة الفرنسية', 'اللغة الألمانية', 'الدراسات الإجتماعية', 'الرياضيات', 'العلوم'];
+            } else if (classValue === 'secondary') {
+                subjects = ['اللغة العربية', 'اللغة الإنجليزية', 'اللغة الفرنسية', 'اللغة الألمانية', 'الرياضيات', 'التاريخ', 'الجغرافيا', 'الفيزياء', 'الكيمياء', 'الأحياء', 'الفلسفة'];
+            }
+
+            subjects.forEach(subject => {
+                const option = document.createElement('option');
+                option.value = subject;
+                option.textContent = subject;
+                subjectSelect.appendChild(option);
+            });
+        });
     </script>
 
 </body>
