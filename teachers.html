@@ -192,6 +192,7 @@
                         teacherCard.innerHTML = `
                             <h2>${teacher.name}</h2>
                             <p>رقم الهاتف: ${teacher.phone}</p>
+                            <p>العنوان: ${teacher.address || 'غير متوفر'}</p>
                         `;
                         resultsDiv.appendChild(teacherCard);
                     });
